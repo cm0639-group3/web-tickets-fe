@@ -1,0 +1,28 @@
+$buttonBackgroundColor: #7b68ee;
+
+.searchTicketsForm {
+  &Header {
+    display: flex;
+    flex-direction: column;
+
+    .searchTicketsSubheader {
+      margin-bottom: 10px;
+
+        .subHeaderButton {
+          background-color: $buttonBackgroundColor;
+          border: 1px solid $buttonBackgroundColor;
+          cursor: pointer;
+          padding: 4px;
+          border-radius: 5px;
+
+          &:first-child {
+            margin-right: 10px;
+          }
+        }
+    }
+
+    .searchTicketsMainInputs {
+      display: flex;
+    }
+  }
+}

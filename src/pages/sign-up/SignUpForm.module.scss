@@ -1,0 +1,39 @@
+@import "../../styles/common";
+
+.signUpForm {
+  .resetPasswordLink {
+    display: flex;
+    justify-content: start;
+    font-size: 14px;
+    margin-top: -34px;
+    margin-bottom: 29px;
+
+    span, a {
+      color: $primaryColor;
+    }
+
+    @include sm-max {
+      margin-top: -14px;
+    }
+  }
+
+  .passwordInput {
+    margin-bottom: 1px;
+  }
+
+  .repeatPasswordInput {
+    //margin-bottom: 7px;
+  }
+
+  .usernameInput {
+    margin-bottom: 25px;
+  }
+
+  @include sm-max {
+    .passwordInput, .repeatPasswordInput {
+      margin-bottom: 25px;
+    }
+  }
+
+  padding-bottom: 25px;
+}

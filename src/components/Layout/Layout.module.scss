@@ -1,0 +1,48 @@
+@import "../../styles/common";
+
+.layout {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 100px;
+  background-color: $primaryBackground;
+  overflow-x: hidden;
+
+  @include sm-max {
+    padding-top: 50px;
+  }
+
+
+  .closeIcon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #535658;
+    border-radius: 30px;
+    padding: 8px;
+    cursor: pointer;
+  }
+
+  @include sm-min {
+    .layoutContent {
+      width: 500px;
+    }
+
+    &.searchPage .layoutContent {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  @include sm-max {
+    .layoutContent {
+      width: 80%;
+    }
+  }
+
+
+  &.searchPage {
+    background-color: #0A0B0C;
+  }
+}
