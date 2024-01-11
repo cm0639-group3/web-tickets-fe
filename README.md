@@ -6,6 +6,8 @@ This FED repository is a workspace for building out the front-end of Airflight t
 2. Local Development Server - Vite 5.0.0 
 3. Typescript 5.2.2 
 4. Software For Automation Of Deployment - Docker
+5. Axios 0.26.1 for REST functionality
+6. Redux 5.0.1 for State management
 
 # Getting Started
 1. Install `nvm` if you haven't already (make sure to uninstall any instances of node first). 
