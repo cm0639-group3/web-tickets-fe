@@ -1,0 +1,33 @@
+@import "../../styles/common.scss";
+
+.selectAddressInput {
+  margin-right: 10px;
+  position: relative;
+  color: $primaryColor;
+  line-height: 21px;
+  margin-bottom: 10px;
+
+  .label {
+    display: block;
+    font-weight: 500;
+    font-size: 17px;
+    margin-bottom: 12px;
+  }
+
+  :global(.react-datepicker-wrapper) {
+    width: 100%;
+  }
+
+
+    input {
+      outline: none;
+      background: transparent;
+      border: 1px solid #535658;
+      border-radius: 5px;
+      padding: 8px 12px;
+      font-size: 15px;
+      font-weight: 400;
+      color: $primaryColor;
+      width: 100%;
+  }
+}

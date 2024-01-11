@@ -10,7 +10,6 @@ const SEARCH_PAGES = ["/search-tickets"];
 
 export const Layout: FC<LayoutProps> = ({ children }) => {
     const isSearchPage = SEARCH_PAGES.includes(window.location.pathname);
-
     return (
         <div className={cn(css.layout, {
             [css.searchPage]: isSearchPage

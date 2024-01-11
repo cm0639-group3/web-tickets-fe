@@ -6,11 +6,11 @@ import {Address, SearchAddressResults} from "./SearchAddressResults";
 
 
 interface SearchInputProps extends InputHTMLAttributes<HTMLInputElement> {
-    value?: string;
     error: string;
+    label: string;
     className?: string;
     addresses?: Array<Address>;
-    label: string;
+    value?: string;
 }
 
 export const SearchAddressInput: FC<SearchInputProps> = ({ label, value,

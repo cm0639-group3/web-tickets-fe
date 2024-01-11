@@ -1,0 +1,50 @@
+@import "../../styles/common.scss";
+
+.ticketsList {
+  .ticket {
+    background: #24282A;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    border: 1px solid #303336;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    label {
+      font-weight: 600;
+      color: $primaryColor;
+      margin: 10px;
+    }
+
+    &Price {
+      color: $primaryColor;
+      margin: 40px;
+      font-size: 23px;
+      font-weight: 600;
+    }
+
+    &BuyButton {
+      margin-top: 10px;
+    }
+
+    &Transfer {
+      color: $secondaryColor;
+      border-top: 1px solid $secondaryColor;
+      margin: 5px;
+      padding: 5px;
+    }
+  }
+
+  @include sm-max {
+    .ticket {
+      padding: 20px;
+      margin-bottom: 20px;
+      align-items: center;
+      flex-direction: column;
+
+      &Price {
+        margin: 5px;
+      }
+    }
+  }
+}
