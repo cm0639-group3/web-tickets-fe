@@ -6,7 +6,7 @@ interface LayoutProps {
     children: React.ReactNode;
 }
 
-const SEARCH_PAGES = ["/search-tickets"];
+const SEARCH_PAGES = ["/search-tickets", "/buy-ticket"];
 
 export const Layout: FC<LayoutProps> = ({ children }) => {
     const isSearchPage = SEARCH_PAGES.includes(window.location.pathname);

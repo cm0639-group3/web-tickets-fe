@@ -3,7 +3,7 @@ import {SearchTicketsForm} from "./SearchTicketsForm";
 import {TicketsList} from "./TicketsList";
 
 //FIXME: Change this hardcoded array with REDUX
-const tickets = [
+export const tickets = [
     {
         price: "130 eur",
         transfers: [
