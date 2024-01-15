@@ -13,28 +13,34 @@ export const TicketsList: FC<TicketsListProps> = ({tickets}) => {
     return (<div className={css.ticketsList}>
         <div>
             {tickets.map((ticket) => <div  key={uuid()} className={css.ticket}>
-            <p>
+            <div>
                 <label>Transfers</label>
                 {ticket.transfers.map(transfer => {
-                    return (<p className={css.ticketTransfer}>
-                        <p><b>{transfer.departmentTimeAndDate}</b> <i>{transfer.departmentCity}</i> : <b>{transfer.arrivalTimeAndDate}</b> <i>{transfer.arrivalCity}</i></p>
-                    </p>)
-                })}</p>
-                <p className={css.ticketPrice}>
+                    return (
+                    <div key={uuid()} className={css.ticketTransfer}>
+                        <div>
+                            <b>{transfer.departmentTimeAndDate}</b>
+                            <i>{transfer.departmentCity}</i> :
+                            <b>{transfer.arrivalTimeAndDate}</b>
+                            <i>{transfer.arrivalCity}</i>
+                        </div>
+                    </div>)})}
+            </div>
+                <div className={css.ticketPrice}>
                     {ticket.price}
                     <Button className={css.ticketBuyButton} btnType="primary">Buy</Button>
-                </p>
+                </div>
             </div>
         )}
         </div>
-        <ReactPaginate
-            breakLabel="..."
-            nextLabel=">"
-            onPageChange={()  => {}}
-            pageRangeDisplayed={5}
-            pageCount={5}
-            previousLabel="<"
-            renderOnZeroPageCount={null}
-        />
+        {/*<ReactPaginate*/}
+        {/*    breakLabel="..."*/}
+        {/*    nextLabel=">"*/}
+        {/*    onPageChange={()  => {}}*/}
+        {/*    pageRangeDisplayed={5}*/}
+        {/*    pageCount={5}*/}
+        {/*    previousLabel="<"*/}
+        {/*    renderOnZeroPageCount={null}*/}
+        {/*/>*/}
     </div>);
 }

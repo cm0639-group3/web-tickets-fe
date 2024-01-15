@@ -18,7 +18,8 @@
 
     /* Linting */
     "strict": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

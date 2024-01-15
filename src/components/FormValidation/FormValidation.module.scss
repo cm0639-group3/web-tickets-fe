@@ -1,0 +1,24 @@
+@import "../../styles/common.scss";
+
+.formValidation {
+  width: 100%;
+  //background: rgba(216, 17, 89, 0.2);
+  border-radius: 5px;
+  //border-top: 3px solid $errorColor;
+  font-size: $primarySize;
+  //color: $errorColor;
+  padding: 30px 20px;
+  margin-bottom: 24px;
+
+  &.error {
+    background: rgba(216, 17, 89, 0.2);
+    border-top: 3px solid $errorColor;
+    color: $errorColor;
+  }
+
+  &.success {
+    background: darkgreen;
+    border-top: green;
+    color: white;
+  }
+}

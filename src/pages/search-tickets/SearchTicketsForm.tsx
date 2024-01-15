@@ -1,10 +1,11 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import css from "./SearchTicketsForm.module.scss";
 import {SearchAddressInput} from "../../components/InputBlock/SearchAddressInput/SearchAddressInput";
 import 'react-datepicker/dist/react-datepicker.css'
 import {SelectAddressInput} from "../../components/SelectAddressInput/SelectAddressInput";
 import Switch from "react-switch";
 import Select from 'react-select'
+import {addFlight, getFlights} from "../../crud/flights.crud";
 
 export const SearchTicketsForm = () => {
     const [isRoundWay, setIsRoundWay] = useState(false);
@@ -12,6 +13,19 @@ export const SearchTicketsForm = () => {
     const [destination, setDestination] = useState("");
     const [departmentDate, setDepartmentDate] = useState<Date | null>(null);
     const [returnDate, setReturnDate] = useState<Date | null>(null);
+
+    useEffect(() => {
+        addFlight({
+            name: "name",
+            departure_time: "departure_time",
+            arrival_time: "arrival_time",
+            distance:  123,
+            airplane: 123,
+            source_airport: 123,
+            destination_airport: 123,
+        });
+        // getFlights();
+    }, [])
 
     const options = [
         { value: 'low-price', label: 'Low Price' },
