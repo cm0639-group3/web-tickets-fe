@@ -1,6 +1,10 @@
 import {ContentHeader} from "../../components/ContentHeader/ContentHeader";
 import {SearchTicketsForm} from "./SearchTicketsForm";
 import {TicketsList} from "./TicketsList";
+import {useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {requestGetFlights} from "../../store/flights/actions";
+
 
 //FIXME: Change this hardcoded array with REDUX
 export const tickets = [
@@ -59,6 +63,12 @@ export const tickets = [
 export type Tickets = typeof tickets;
 
 export const SearchTicketsPage = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(requestGetFlights({}));
+    }, []);
+
     return (
         <div>
             <ContentHeader label="Search for tickets"

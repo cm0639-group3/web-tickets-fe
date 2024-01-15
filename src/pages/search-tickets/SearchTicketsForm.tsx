@@ -14,19 +14,6 @@ export const SearchTicketsForm = () => {
     const [departmentDate, setDepartmentDate] = useState<Date | null>(null);
     const [returnDate, setReturnDate] = useState<Date | null>(null);
 
-    useEffect(() => {
-        addFlight({
-            name: "name",
-            departure_time: "departure_time",
-            arrival_time: "arrival_time",
-            distance:  123,
-            airplane: 123,
-            source_airport: 123,
-            destination_airport: 123,
-        });
-        // getFlights();
-    }, [])
-
     const options = [
         { value: 'low-price', label: 'Low Price' },
         { value: 'high-price', label: 'High Price' },
