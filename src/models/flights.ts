@@ -9,4 +9,15 @@ export interface Flight {
     airplane: number;
     source_airport: number;
     destination_airport: number;
+    base_price: string;
+}
+
+export interface Airport {
+    id: number;
+    name: string;
+    code: string;
+    city: string;
+    ordering: string;
+    limit: string;
+    offset: string;
 }

@@ -43,4 +43,16 @@ $buttonBackgroundColor: #7b68ee;
   .filterTicketsContainer {
     margin-bottom: 20px;
   }
+
+  &SubmitButton {
+    width: 100px;
+    height: 40px;
+    margin-top: 32px;
+  }
+
+  .inputSelected {
+    input {
+      color: #6AA5FC;
+    }
+  }
 }

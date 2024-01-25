@@ -18,13 +18,16 @@
 
     &Price {
       color: $primaryColor;
-      margin: 40px;
+      margin: 20px;
       font-size: 23px;
       font-weight: 600;
+      display: flex;
+      flex-direction: column;
     }
 
     &BuyButton {
       margin-top: 10px;
+      width: 100px;
     }
 
     &Transfer {
@@ -32,6 +35,19 @@
       border-top: 1px solid $secondaryColor;
       margin: 5px;
       padding: 5px;
+      width: 500px;
+
+      .ticketDateInfo {
+        display: flex;
+        flex-direction: column;
+
+        b {
+          color: $errorColor;
+        }
+        i {
+          color: $primaryColor;
+        }
+      }
     }
   }
 
@@ -45,6 +61,17 @@
       &Price {
         margin: 5px;
       }
+    }
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+
+    &Btn {
+      width: 60px;
+      height: 40px;
+      margin: 10px;
     }
   }
 }

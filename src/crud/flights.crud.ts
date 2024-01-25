@@ -1,5 +1,5 @@
 import createdAxios from "../axios/setup";
-import {Flight} from "../models/flights";
+import {Airport, Flight} from "../models/flights";
 
 export interface GetFlightsData {
     name?: string;
@@ -21,7 +21,27 @@ export interface GetFlightsResponse {
 }
 
 export const getFlights = (data: GetFlightsData): Promise<GetFlightsResponse> =>
-    createdAxios.get("/api/flight/", data);
+    createdAxios.get("/api/flight/", {params: data});
 
 
 export const addFlight = (data: Flight): Promise<Flight> => createdAxios.post("/api/flight/", data);
+
+export interface GetAirportResponse {
+    count: number;
+    next: number | null;
+    previous: number | null;
+    results: Airport[];
+}
+
+export interface GetAirportsData {
+    name?: string;
+    code?: string;
+    city?: string;
+    ordering?: string;
+    limit?: string;
+    offset?: string;
+    isSourceAirport: boolean;
+}
+
+export const getAirports = (data: GetAirportsData): Promise<GetAirportResponse> => createdAxios.get("/api/airport", {
+    params: data});

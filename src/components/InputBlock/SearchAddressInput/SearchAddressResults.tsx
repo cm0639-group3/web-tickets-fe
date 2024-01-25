@@ -1,19 +1,15 @@
 import css from "./SearchAdressResults.module.scss";
 import { v4 as uuid } from "uuid";
 import cn from "classnames";
-import {FC} from "react";
-
-export interface Address {
-    code: string; //MLP, TGD
-    city: string; //Airport of Malpensa
-    description: string; //Some description of Airport or city
-}
+import React, {FC} from "react";
+import {Airport} from "../../../models/flights";
 
 type SearchAddressResultsProps = {
-    addresses: Address[];
+    addresses: Airport[];
+    onSelectAddress: (airport: Airport) => void;
 }
 
-export const SearchAddressResults: FC<SearchAddressResultsProps> = ({ addresses }) => {
+export const SearchAddressResults: FC<SearchAddressResultsProps> = ({ addresses, onSelectAddress }) => {
     return (
         <div className={css.addressResult}>
             <label className={css.code}>
@@ -23,7 +19,9 @@ export const SearchAddressResults: FC<SearchAddressResultsProps> = ({ addresses 
                 {addresses.map(c => (
                     <li
                         key={uuid()}
-                        className={cn( css.result)}>
+                        className={cn( css.result)}
+                        onClick={() => onSelectAddress(c)}
+                    >
                         <b>{c.code}</b> {c.city}
                     </li>
                 ))}
