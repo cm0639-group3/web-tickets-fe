@@ -5,6 +5,10 @@ import {FC, useEffect} from "react";
 import {Ticket} from "../../models/tickets";
 import {useDispatch, useSelector} from "react-redux";
 import {selectFlights} from "../../store/flights/selectors";
+import {Link} from "react-router-dom";
+import {Flight} from "../../models/flights";
+import {setCurrentFlight} from "../../store/flights/actions";
+import {flightDateFormat} from "../../helpers/flightDateFormat";
 
 interface TicketsListProps {
     // tickets: Ticket[],
@@ -34,16 +38,15 @@ export const TicketsList: FC<TicketsListProps> = ({
     //     setPage(page+1);
     // }
 
+    const handleBuyTicketClick = (flight: Flight) => {
+        dispatch(setCurrentFlight(flight));
+    }
+
     return (<div className={css.ticketsList}>
         <div>
             {flights.map((flight) => {
-            const departureTime = new Date(flight.departure_time);
-            const departureHour = departureTime.getUTCHours();
-            const departureMinute = departureTime.getUTCMinutes();
-
-            const arrivalTime = new Date(flight.arrival_time);
-            const arrivalHour = departureTime.getUTCHours();
-            const arrivalMinute = departureTime.getUTCMinutes();
+            const { departureMinute, departureHour, departureTime,
+                arrivalMinute, arrivalHour, arrivalTime } = flightDateFormat(flight);
 
             return <div  key={uuid()} className={css.ticket}>
             <div>
@@ -68,7 +71,9 @@ export const TicketsList: FC<TicketsListProps> = ({
             </div>
                 <div className={css.ticketPrice}>
                     {flight.base_price}
-                    <Button className={css.ticketBuyButton} btnType="primary">Buy</Button>
+                    <Link to={`/add-to-cart/${flight.id}`}>
+                        <Button onClick={() => handleBuyTicketClick(flight)} className={css.ticketBuyButton} btnType="primary">Buy</Button>
+                    </Link>
                 </div>
             </div> }
         )}

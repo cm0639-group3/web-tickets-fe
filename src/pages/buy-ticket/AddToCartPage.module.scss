@@ -1,0 +1,22 @@
+@import "../../styles/common.scss";
+
+.contentHeaderFlightName {
+  color: $errorColor;
+}
+
+.loader {
+  color: $primaryColor;
+}
+
+.buttonsToBuy {
+  display: flex;
+  justify-content: space-evenly;
+
+  .buyButton, .addToCartButton {
+    width: 30%;
+  }
+
+  .addToCartButton {
+    background: darkslategrey;
+  }
+}

@@ -21,3 +21,10 @@ export interface Airport {
     limit: string;
     offset: string;
 }
+
+export interface Luggage {
+    id: number;
+    name: string;
+    size: string;
+    unit: string;
+}

@@ -1,7 +1,10 @@
-import {GetAirportResponse,
+import {
+    GetAirportResponse,
     getFlights as getFlightsRequest,
     GetFlightsResponse,
-    getAirports as getAirportsRequest
+    getAirports as getAirportsRequest,
+    getFlightById as getFlightByIdRequest, GetLuggageResponse,
+    getListOfLuggage as getListOfLuggageRequest,
 } from "../../crud/flights.crud";
 import {
     REQUEST_GET_FLIGHTS,
@@ -10,10 +13,19 @@ import {
     requestGetFlights,
     FlightsActions,
     RequestGetFlights,
-    RequestGetAirports, setAirports, REQUEST_GET_AIRPORTS
+    RequestGetAirports,
+    setAirports,
+    REQUEST_GET_AIRPORTS,
+    RequestGetFlightByIdPayload,
+    setCurrentFlight,
+    REQUEST_GET_FLIGHT_BY_ID,
+    requestGetListOfLuggage,
+    REQUEST_GET_LIST_OF_LUGGAGE,
+    RequestGetListOfLuggagePayload, setListOfLuggage
 } from "./actions";
 import type { AllEffect, CallEffect, ForkEffect, PutEffect, SelectEffect } from "redux-saga/effects";
 import { all, call, delay, put, select, takeLatest } from "redux-saga/effects";
+import {Flight, Luggage} from "../../models/flights";
 
 export function* getFlightsSaga({ payload }: RequestGetFlights): Generator<CallEffect<GetFlightsResponse> | PutEffect, void, GetFlightsResponse> {
     try {
@@ -44,8 +56,37 @@ export function* getAirportsSaga({ payload }: RequestGetAirports): Generator<Cal
     }
 }
 
+export function* getFlightById({ payload }: RequestGetFlightByIdPayload): Generator<CallEffect<Flight> | PutEffect, void, Flight> {
+    try {
+        const response = yield call(getFlightByIdRequest, payload);
+
+        yield put(
+            setCurrentFlight(response.data)
+        )
+    } catch (error) {
+        //TODO: Add error handling
+    }
+}
+
+export function* getListOfLuggage({ payload }: RequestGetListOfLuggagePayload): Generator<CallEffect<GetLuggageResponse> | PutEffect, void, GetLuggageResponse> {
+    try {
+        const response = yield call(getListOfLuggageRequest, payload) as Array<Luggage>;
+        const results = response.data.results as Luggage[];
+
+        yield put(
+            setListOfLuggage({
+                listOfLuggage: results,
+            })
+        )
+    } catch (e) {
+        //TODO: Add error handling
+    }
+}
+
 
 export function* watchFlights(): Generator<ForkEffect<never>, void, unknown> {
     yield takeLatest(REQUEST_GET_FLIGHTS, getFlightsSaga);
     yield takeLatest(REQUEST_GET_AIRPORTS, getAirportsSaga);
+    yield takeLatest(REQUEST_GET_FLIGHT_BY_ID, getFlightById);
+    yield takeLatest(REQUEST_GET_LIST_OF_LUGGAGE, getListOfLuggage);
 }

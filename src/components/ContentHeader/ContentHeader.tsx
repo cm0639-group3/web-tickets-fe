@@ -1,9 +1,9 @@
-import { FC } from "react";
+import {FC, ReactElement} from "react";
 import css from "./ContentHeader.module.scss";
 import cn from "classnames";
 
 interface ContentHeaderProps {
-    label: string;
+    label: ReactElement  | string;
     content: string;
     className?: string;
 }

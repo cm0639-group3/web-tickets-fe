@@ -13,6 +13,11 @@ import {Button} from "../../components/Button/Button";
 import {Airport} from "../../models/flights";
 import cn from "classnames";
 
+//Filter by Select options
+const FILTER_BY_OPTIONS = [
+    { value: 'low-price', label: 'Low Price' },
+    { value: 'high-price', label: 'High Price' },
+];
 
 export const SearchTicketsForm = () => {
     // const [isRoundWay, setIsRoundWay] = useState(false);
@@ -24,19 +29,8 @@ export const SearchTicketsForm = () => {
     const [returnDate, setReturnDate] = useState<Date | null>(null);
     const dispatch = useDispatch();
 
-    // console.log("source = ", source);
-    console.log("departmentDate = ", departmentDate);
 
     const { airports, isSourceAirport } = useSelector(selectAirports);
-    const { flights } = useSelector(selectFlights);
-
-    console.log("flights = ", flights);
-
-    const options = [
-        { value: 'low-price', label: 'Low Price' },
-        { value: 'high-price', label: 'High Price' },
-        { value: 'less-number-of-transfers', label: 'Less Number of transfers' }
-    ];
 
     const handleChangeSourceAirport = (event: ChangeEvent) => {
         dispatch(requestGetAirports({
@@ -53,21 +47,14 @@ export const SearchTicketsForm = () => {
     }
 
     const handleSelectDestinationAddress = (airport: Airport) => {
-        console.log("airport = ", airport);
-        // setTimeout(() => {
-            setDestination(airport);
-        // }, 0);
+        setDestination(airport);
     };
 
     const handleSelectSourceAddress = (airport: Airport) => {
-        console.log("airport = ", airport);
-        // setTimeout(() => {
-            setSource(airport);
-        // }, 0);
+        setSource(airport);
     }
 
     const handleSubmitSearch = (event: React.MouseEvent<HTMLButtonElement>) => {
-        // console.log("departmentDate = ", departmentDate.toISOString().substring(0, 10));
         dispatch(requestGetFlights({
             source_airport: source?.id,
             destination_airport: destination?.id,
@@ -122,7 +109,7 @@ export const SearchTicketsForm = () => {
             </div>
         </div>
         <div className={css.filterTicketsContainer}>
-            <Select options={options} placeholder="Filter by" />
+            <Select options={FILTER_BY_OPTIONS} placeholder="Filter by" />
         </div>
     </div>);
 }
