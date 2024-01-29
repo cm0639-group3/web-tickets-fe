@@ -26,6 +26,7 @@ import {
 import type { AllEffect, CallEffect, ForkEffect, PutEffect, SelectEffect } from "redux-saga/effects";
 import { all, call, delay, put, select, takeLatest } from "redux-saga/effects";
 import {Flight, Luggage} from "../../models/flights";
+import {setErrorNotification} from "../../modules/notification/state";
 
 export function* getFlightsSaga({ payload }: RequestGetFlights): Generator<CallEffect<GetFlightsResponse> | PutEffect, void, GetFlightsResponse> {
     try {
@@ -37,7 +38,12 @@ export function* getFlightsSaga({ payload }: RequestGetFlights): Generator<CallE
             }),
         );
     } catch (error) {
-        //TODO: Add error handling
+        yield put(
+            setErrorNotification({
+                title: error.status,
+                message: error.message,
+            })
+        )
     }
 }
 
@@ -52,7 +58,12 @@ export function* getAirportsSaga({ payload }: RequestGetAirports): Generator<Cal
             })
         )
     } catch (error) {
-        //TODO: Add error handling
+        yield put(
+            setErrorNotification({
+                title: error.status,
+                message: error.message,
+            })
+        )
     }
 }
 
@@ -64,7 +75,12 @@ export function* getFlightById({ payload }: RequestGetFlightByIdPayload): Genera
             setCurrentFlight(response.data)
         )
     } catch (error) {
-        //TODO: Add error handling
+        yield put(
+            setErrorNotification({
+                title: error.status,
+                message: error.message,
+            })
+        )
     }
 }
 
@@ -79,7 +95,12 @@ export function* getListOfLuggage({ payload }: RequestGetListOfLuggagePayload): 
             })
         )
     } catch (e) {
-        //TODO: Add error handling
+        yield put(
+            setErrorNotification({
+                title: e.status,
+                message: e.message,
+            })
+        )
     }
 }
 

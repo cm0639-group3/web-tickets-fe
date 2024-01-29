@@ -2,6 +2,7 @@ import {REQUEST_GET_TICKETS, RequestGetTickets, setTickets} from "./actions";
 import type { AllEffect, CallEffect, ForkEffect, PutEffect, SelectEffect } from "redux-saga/effects";
 import {getTickets as getTicketsRequest, GetTicketsResponse} from "../../crud/tickets.crud";
 import { all, call, delay, put, select, takeLatest } from "redux-saga/effects";
+import {setErrorNotification} from "../../modules/notification/state";
 
 export function* getTicketsSaga({ payload }: RequestGetTickets): Generator<CallEffect<GetTicketsResponse> | PutEffect, void, GetTicketsResponse> {
     try {
@@ -10,7 +11,12 @@ export function* getTicketsSaga({ payload }: RequestGetTickets): Generator<CallE
             setTickets(response.data)
         )
     } catch (error) {
-        //TODO: Add error handling
+        yield put(
+            setErrorNotification({
+                title: error.status,
+                message: error.message,
+            })
+        )
     }
 }
 

@@ -4,8 +4,8 @@ import {getCart as getCartRequest, buyCartTicket as buyCartTicketRequest, buyCar
 import { SetCartPayload } from "./actions";
 
 import { all, call, delay, put, select, takeLatest } from "redux-saga/effects";
-import {getFlightById} from "../flights/saga";
 import {Ticket} from "../../models/tickets";
+import {setErrorNotification} from "../../modules/notification/state";
 
 export function* getCartSaga({ payload }: RequestGetCart): Generator<CallEffect<SetCartPayload> | PutEffect, void, SetCartPayload> {
     try {
@@ -15,7 +15,12 @@ export function* getCartSaga({ payload }: RequestGetCart): Generator<CallEffect<
             setCart(response.data)
         )
     } catch (error) {
-        //TODO: Add error handling
+        yield put(
+            setErrorNotification({
+                title: error.status,
+                message: error.message,
+            })
+        )
     }
 }
 
@@ -23,7 +28,12 @@ export function* buyCartTicketSaga({ payload }: Ticket): Generator<CallEffect<Ti
     try {
         yield call(buyCartTicketRequest, payload);
     } catch (error) {
-        //TODO: Add error handling
+        yield put(
+            setErrorNotification({
+                title: error.status,
+                message: error.message,
+            })
+        )
     }
 }
 

@@ -10,18 +10,20 @@ import {ticketsReducer} from "./tickets/reducer";
 import {cartReducer} from "./cart/reducer";
 import {watchCart} from "./cart/saga";
 import {CartState} from "./cart/types";
-
+import {notificationReducer, NotificationState } from "../modules/notification/state";
 
 export interface AppRootState {
     flights: FlightsState;
     tickets: TicketsState;
     cart: CartState;
+    notification: NotificationState;
 }
 
 export const rootReducer = combineReducers({
     flights: flightsReducer,
     tickets: ticketsReducer,
     cart: cartReducer,
+    notification: notificationReducer,
 });
 
 export function* rootSaga(): Generator<

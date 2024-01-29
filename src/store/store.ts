@@ -3,6 +3,7 @@ import createSagaMiddleware from "redux-saga";
 
 import type { AppRootState } from "./rootDuck";
 import { rootReducer, rootSaga } from "./rootDuck";
+import {initAxiosInterceptors} from "../axios/setup";
 
 declare global {
     interface Window {
@@ -19,6 +20,8 @@ export const store = createStore(
 );
 
 sagaMiddleware.run(rootSaga);
+
+initAxiosInterceptors(store);
 
 declare module "react-redux" {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
