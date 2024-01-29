@@ -35,5 +35,4 @@ export interface RefreshTokenData {
 
 export const refreshToken = (data: RefreshTokenData): Promise<SignInResponse> => createdAxios.post("api/token/refresh/", data)
     .then(response => {
-        console.log("response = ", response);
     });

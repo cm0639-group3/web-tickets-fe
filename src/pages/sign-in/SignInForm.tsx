@@ -40,7 +40,6 @@ export const SignInForm = () => {
                 username,
                 password,
             }).catch((error) => {
-                console.log("error = ", error);
                 setFormValidation({
                     error: error.message,
                     success: "",

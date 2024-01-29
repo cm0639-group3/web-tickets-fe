@@ -7,9 +7,7 @@ import { all, call, delay, put, select, takeLatest } from "redux-saga/effects";
 
 export function* getCartSaga({ payload }: RequestGetCart): Generator<CallEffect<SetCartPayload> | PutEffect, void, SetCartPayload> {
     try {
-        console.log("payload = ", payload);
         const response = yield call(getCartRequest({}), payload);
-        console.log("response = ", response.data);
         yield put(
             setCart(response.data)
         )

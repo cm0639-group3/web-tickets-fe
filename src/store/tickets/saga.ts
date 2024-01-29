@@ -5,9 +5,7 @@ import { all, call, delay, put, select, takeLatest } from "redux-saga/effects";
 
 export function* getTicketsSaga({ payload }: RequestGetTickets): Generator<CallEffect<GetTicketsResponse> | PutEffect, void, GetTicketsResponse> {
     try {
-        console.log("payload = ", payload);
         const response = yield call(getTicketsRequest, payload);
-        console.log("response = ", response.data);
         yield put(
             setTickets(response.data)
         )
