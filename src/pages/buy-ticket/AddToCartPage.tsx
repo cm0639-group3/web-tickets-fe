@@ -29,9 +29,12 @@ export const AddToCartPage = () => {
     useEffect(() => {
         if (!currentFlight && id) {
             dispatch(requestGetFlightById(id));
-            dispatch(requestGetListOfLuggage({}));
         }
     }, [currentFlight, id]);
+
+    useEffect(() => {
+        dispatch(requestGetListOfLuggage({}));
+    }, [id])
 
     const handleInputChange = (evt) => {
         const { name, value } = evt.target;

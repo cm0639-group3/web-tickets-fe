@@ -7,21 +7,26 @@ import {FlightsState} from "./flights/types";
 import {watchTickets} from "./tickets/saga";
 import {TicketsState} from "./tickets/types";
 import {ticketsReducer} from "./tickets/reducer";
+import {cartReducer} from "./cart/reducer";
+import {watchCart} from "./cart/saga";
+import {CartState} from "./cart/types";
 
 
 export interface AppRootState {
     flights: FlightsState;
     tickets: TicketsState;
+    cart: CartState;
 }
 
 export const rootReducer = combineReducers({
     flights: flightsReducer,
     tickets: ticketsReducer,
+    cart: cartReducer,
 });
 
 export function* rootSaga(): Generator<
     AllEffect<Generator<TakeEffect | ForkEffect<never> | CallEffect | ActionChannelEffect, void>>,
     void
     > {
-    yield all([watchFlights(), watchTickets()]);
+    yield all([watchFlights(), watchTickets(), watchCart()]);
 }

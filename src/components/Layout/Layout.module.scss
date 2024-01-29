@@ -1,5 +1,21 @@
 @import "../../styles/common";
 
+.cartIcon {
+  color: white;
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  cursor: pointer;
+
+  &:before {
+    content: "\25BB";
+  }
+}
+
+.hidden {
+  display: none;
+}
+
 .layout {
   height: 100%;
   display: flex;
