@@ -1,5 +1,5 @@
-import {Cart} from "../../models/cart";
+import {Ticket} from "../../models/tickets";
 
 export interface CartState {
-    cart: Cart[];
+    cart: Ticket[];
 }

@@ -14,7 +14,7 @@ const initialFlightsState: FlightsState = Object.freeze({
     flights: [],
 })
 
-export const flightsReducer = (state = initialFlightsState, action: FlightsActions) => {
+export const flightsReducer = (state = initialFlightsState, action: FlightsActions): FlightsState => {
     switch (action.type) {
         case REQUEST_GET_FLIGHTS:
         case REQUEST_GET_FLIGHT_BY_ID:

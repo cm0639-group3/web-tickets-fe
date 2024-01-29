@@ -1,14 +1,10 @@
 import {Ticket} from "../../models/tickets";
 import {DefaultRootState} from "react-redux";
 
-interface SelectTickets {
-    tickets: Ticket[];
-    next: string | null;
-    previous: string | null;
+interface SelectCart {
+    cart: Ticket[];
 }
 
-export const selectTickets = (state: DefaultRootState): SelectTickets => ({
-    tickets: state.tickets.tickets,
-    next: state.tickets.next,
-    previous: state.tickets.previous,
-})
+export const selectCart = (state: DefaultRootState): SelectCart => ({
+    cart: state.cart.cart,
+});

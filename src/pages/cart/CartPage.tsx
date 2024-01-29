@@ -1,21 +1,23 @@
 import {ContentHeader} from "../../components/ContentHeader/ContentHeader";
 import css from "./CartPage.module.scss"
 import {useEffect} from "react";
-import {useDispatch} from "react-redux";
-import {getCart} from "../../crud/cart.crud";
+import {useDispatch, useSelector} from "react-redux";
 import {requestGetCart} from "../../store/cart/actions";
+import {selectCart} from "../../store/cart/selectors";
+import {CartTicketsList} from "./CartTicketsList";
 
 export const CartPage = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
+    const { cart } = useSelector(selectCart);
 
     useEffect(() => {
         dispatch(requestGetCart({}));
     }, []);
 
     return (<div>
-        <ContentHeader label={<div>Cart Page</div>}
-                       content="Here there is you cart"
+        <ContentHeader label={<div>Cart</div>}
+           content="Here there is your cart"
         />
-
+        <CartTicketsList cart={cart} />
     </div>);
 }
