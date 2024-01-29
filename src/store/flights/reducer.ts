@@ -6,9 +6,10 @@ import {
     SET_AIRPORTS,
     SET_CURRENT_FLIGHT,
     SET_FLIGHTS,
-    SET_LIST_OF_LUGGAGE, SET_LUGGAGE
+    SET_LIST_OF_LUGGAGE, SET_LUGGAGE, SORT_FLIGHTS_LIST
 } from "./actions";
 import {FlightsState} from "./types";
+import {sortFlights} from "../../helpers/sortFlights";
 
 const initialFlightsState: FlightsState = Object.freeze({
     flights: [],
@@ -35,6 +36,12 @@ export const flightsReducer = (state = initialFlightsState, action: FlightsActio
                 ...state,
                 airports: action.payload.airports,
                 isSourceAirport: action.payload.isSourceAirport,
+            }
+        case SORT_FLIGHTS_LIST:
+            const { sortBy, isAsc } = action.payload;
+            return {
+                ...state,
+                flights: sortFlights(state.flights, sortBy, isAsc),
             }
         case SET_LIST_OF_LUGGAGE:
             return {

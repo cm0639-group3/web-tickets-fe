@@ -39,6 +39,8 @@ export const SignInForm = () => {
             await signIn({
                 username,
                 password,
+            }).then(() => {
+                window.location.href = "/search-tickets";
             }).catch((error) => {
                 setFormValidation({
                     error: error.message,

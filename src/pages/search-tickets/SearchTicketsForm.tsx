@@ -6,31 +6,47 @@ import {SelectAddressInput} from "../../components/SelectAddressInput/SelectAddr
 import Switch from "react-switch";
 import Select from 'react-select'
 import {addFlight } from "../../crud/flights.crud";
-import {requestGetAirports, setAirports, requestGetFlights} from "../../store/flights/actions";
+import {requestGetAirports, setAirports, requestGetFlights, sortFlightsList} from "../../store/flights/actions";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAirports, selectFlights} from "../../store/flights/selectors";
 import {Button} from "../../components/Button/Button";
 import {Airport} from "../../models/flights";
 import cn from "classnames";
 
+
 //Filter by Select options
 const FILTER_BY_OPTIONS = [
-    { value: 'low-price', label: 'Low Price' },
-    { value: 'high-price', label: 'High Price' },
+    { value: 'asc', label: 'Low Price' },
+    { value: 'desc', label: 'High Price' },
 ];
 
+interface FilterBy {
+    value: string;
+    label: string;
+}
+
 export const SearchTicketsForm = () => {
-    // const [isRoundWay, setIsRoundWay] = useState(false);
     const [source, setSource] = useState<Airport | null>(null);
     const [destination, setDestination] = useState<Airport | null>(null);
-    const destinationInputRef = useRef<HTMLLabelElement | null>(null);
-    const sourceInputRef = useRef<HTMLLabelElement | null>(null);
-    const [departmentDate, setDepartmentDate] = useState<Date | undefined>(null);
-    const [returnDate, setReturnDate] = useState<Date | null>(null);
+    const [departmentDate, setDepartmentDate] = useState<Date | null>(null);
+    const [selectFilter, setSelectFilter] = useState<FilterBy>(null);
+
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        if (selectFilter) {
+            dispatch(sortFlightsList({
+                sortBy: "base_price",
+                isAsc: selectFilter.value == "asc",
+            }));
+        }
+    }, [selectFilter]);
 
     const { airports, isSourceAirport } = useSelector(selectAirports);
+
+    const handleFilterChange = (selectedOption: FilterBy) => {
+        setSelectFilter(selectedOption);
+    }
 
     const handleChangeSourceAirport = (event: ChangeEvent) => {
         dispatch(requestGetAirports({
@@ -58,9 +74,8 @@ export const SearchTicketsForm = () => {
         dispatch(requestGetFlights({
             source_airport: source?.id,
             destination_airport: destination?.id,
-            // departure_time: departmentDate.toISOString().substring(0, 10),
-        }))
-
+            departure_time: departmentDate.toISOString().substring(0, 10),
+        }));
     }
 
     return (<div className={css.searchTicketsForm}>
@@ -100,6 +115,7 @@ export const SearchTicketsForm = () => {
 
                 <Button className={css.searchTicketsFormSubmitButton}
                     btnType="primary"
+                    disabled={!departmentDate || !source || !destination}
                     onClick={handleSubmitSearch}>
                     Search
                 </Button>
@@ -109,7 +125,9 @@ export const SearchTicketsForm = () => {
             </div>
         </div>
         <div className={css.filterTicketsContainer}>
-            <Select options={FILTER_BY_OPTIONS} placeholder="Filter by" />
+            <Select onChange={handleFilterChange}
+                    options={FILTER_BY_OPTIONS}
+                    placeholder="Filter by" />
         </div>
     </div>);
 }

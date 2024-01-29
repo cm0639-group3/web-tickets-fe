@@ -3,18 +3,19 @@ import type { AllEffect, CallEffect, ForkEffect, PutEffect, SelectEffect } from 
 import {getTickets as getTicketsRequest, GetTicketsResponse} from "../../crud/tickets.crud";
 import { all, call, delay, put, select, takeLatest } from "redux-saga/effects";
 import {setErrorNotification} from "../../modules/notification/state";
+import type { AxiosError } from "axios";
 
 export function* getTicketsSaga({ payload }: RequestGetTickets): Generator<CallEffect<GetTicketsResponse> | PutEffect, void, GetTicketsResponse> {
     try {
         const response = yield call(getTicketsRequest, payload);
         yield put(
-            setTickets(response.data)
+            setTickets(response.results)
         )
     } catch (error) {
         yield put(
             setErrorNotification({
-                title: error.status,
-                message: error.message,
+                title: (error as Error)?.message,
+                message: (error as Error).message,
             })
         )
     }

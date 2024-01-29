@@ -54,6 +54,7 @@ export const SET_CURRENT_FLIGHT = "flights/SET_CURRENT_FLIGHT";
 export const SET_AIRPORTS = "flights/SET_AIRPORTS";
 export const SET_LIST_OF_LUGGAGE = "flights/SET_LIST_OF_LUGGAGE";
 export const SET_LUGGAGE = "flights/SET_LUGGAGE";
+export const SORT_FLIGHTS_LIST = "flights/SORT_FLIGHTS_LIST"
 
 interface SetFlightsPayload {
     flights: Flight[];
@@ -78,12 +79,19 @@ interface SetListOfLuggagePayload {
 }
 
 type SetListOfLuggage = CommonAction<typeof SET_LIST_OF_LUGGAGE, SetListOfLuggagePayload>;
-export const setListOfLuggage = (payload: SetListOfLuggage) => createAction(SET_LIST_OF_LUGGAGE, payload)
+export const setListOfLuggage = (payload: { listOfLuggage: Luggage[] }) => createAction(SET_LIST_OF_LUGGAGE, payload)
 
 type SetLuggage = CommonAction<typeof SET_LUGGAGE, Luggage>;
 export const setLuggage = (payload: Luggage) => createAction(SET_LUGGAGE, payload)
 
-export type FlightsActions = RequestGetFlights | RequestGetFlightById | SetFlights
-    | SetCurrentFlight | RequestGetAirports | SetAirports | SetListOfLuggage
-    | SetLuggage | RequestGetListOfLuggagePayload;
+interface SortFlightsListPayload {
+    sortBy: "base_price" | "departure_time",
+    isAsc: boolean;
+}
 
+type SortFlightsList = CommonAction<typeof SORT_FLIGHTS_LIST, SortFlightsListPayload>;
+export const sortFlightsList = (payload: SortFlightsListPayload) => createAction(SORT_FLIGHTS_LIST, payload);
+
+export type FlightsActions = RequestGetFlights | RequestGetFlightById | SetFlights
+    | SetCurrentFlight | RequestGetAirports | SetAirports |  SortFlightsList
+    | SetLuggage | RequestGetListOfLuggagePayload;
